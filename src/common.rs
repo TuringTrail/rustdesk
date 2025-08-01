@@ -1710,6 +1710,9 @@ pub fn get_hwid() -> Bytes {
 
 #[inline]
 pub fn get_builtin_option(key: &str) -> String {
+    if key == "hide-server-settings" && option_env!("HIDE_SERVER_SETTINGS").unwrap_or("") == "Y" {
+        return "Y".to_string();
+    }
     config::BUILTIN_SETTINGS
         .read()
         .unwrap()
