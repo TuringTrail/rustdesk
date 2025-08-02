@@ -113,6 +113,11 @@ pub fn global_init() -> bool {
             crate::server::wayland::init();
         }
     }
+    if option_env!("DEFAULT_DIRECT_SERVER").unwrap_or("") == "Y" {
+        if Config::get_option("direct-server").is_empty() {
+            Config::set_option("direct-server".to_owned(), "Y".to_owned());
+        }
+    }
     true
 }
 
